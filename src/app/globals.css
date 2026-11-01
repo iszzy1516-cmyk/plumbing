@@ -1,0 +1,240 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-blue: var(--blue);
+  --color-blue-dark: var(--blue-dark);
+  --color-blue-soft: var(--blue-soft);
+  --color-error: var(--error);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --font-sans: var(--font-google-sans);
+  --font-heading: var(--font-google-sans);
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+:root {
+  --ink: #1f1f1f;
+  --ink-soft: #49525a;
+  --surface: #ffffff;
+  --surface-2: #f2f5f7;
+  --line: #dfe5ea;
+  --blue: #0b5c94;
+  --blue-dark: #08466f;
+  --blue-soft: #e1f0fa;
+  --error: #b3261e;
+
+  --background: var(--surface);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--blue);
+  --primary-foreground: #ffffff;
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-2);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--blue-soft);
+  --accent-foreground: var(--ink);
+  --destructive: var(--error);
+  --border: var(--line);
+  --input: #80868b;
+  --ring: var(--blue);
+  --radius: 1rem;
+
+  --page: clamp(1rem, 4vw, 3rem);
+  --section: clamp(4.5rem, 9vw, 8.5rem);
+  --nav-height: 4.5rem;
+  --card-radius: clamp(1.25rem, 2.4vw, 2rem);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
+    line-height: 1.55;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--blue-soft);
+  }
+}
+
+@utility text-hero {
+  font-size: clamp(2.75rem, 1.6rem + 5.2vw, 6rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+
+@utility text-h2 {
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+  line-height: 1.1;
+}
+
+@utility text-h3 {
+  font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.875rem);
+  line-height: 1.2;
+}
+
+@utility text-lead {
+  font-size: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);
+  line-height: 1.4;
+}
+
+@utility text-small {
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+@utility page {
+  width: 100%;
+  max-width: 96rem;
+  margin-inline: auto;
+  padding-inline: var(--page);
+}
+
+@utility card {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+/* Runs on first paint without any script, and always ends visible. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+}
+
+/* A picture opens like a shutter, sideways from its centre. */
+@keyframes shutter {
+  from {
+    clip-path: inset(0 50% 0 50% round 0.2em);
+  }
+}
+
+@keyframes page-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
+@keyframes reveal-zoom {
+  from {
+    transform: scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: var(--rise-delay, 0ms);
+  }
+
+  .shutter {
+    animation: shutter 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.15s both;
+  }
+
+  .page-fade {
+    animation: page-fade 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .menu-item {
+    animation: rise 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+
+  /* Scroll-linked reveals that run in CSS, so they cost no JavaScript. Other browsers just show the content. */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+
+    /* Named timelines, because a clipped parent would otherwise become the scroller these measure against. */
+    .reveal-zoom {
+      view-timeline-name: --reveal-zoom;
+    }
+
+    .reveal-zoom__picture {
+      animation: reveal-zoom linear both;
+      animation-timeline: --reveal-zoom;
+      animation-range: entry 0% cover 45%;
+    }
+
+    .reveal-row {
+      view-timeline-name: --reveal-row;
+    }
+
+    .reveal-row > * {
+      animation: reveal-up linear both;
+      animation-timeline: --reveal-row;
+      animation-range: entry 0% entry 90%;
+    }
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
